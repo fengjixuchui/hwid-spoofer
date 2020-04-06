@@ -262,16 +262,6 @@ UINT64 FindPattern(UINT64 dwAddress, UINT64 dwLen, BYTE* bMask, char* szMask)
 	return 0;
 }
 
-PVOID FindPatternPvoid(UINT64 dwAddress, UINT64 dwLen, BYTE* bMask, char* szMask)
-{
-	for (UINT64 i = 0; i < dwLen; i++)
-		if (bDataCompare((BYTE*)(dwAddress + i), bMask, szMask))
-			return (PVOID)(dwAddress + i);
-
-	return 0;
-}
-
-
 extern "C" BOOLEAN CleanUnloadedDrivers()
 {
 	ULONG bytes = 0;
