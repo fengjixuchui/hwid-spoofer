@@ -373,35 +373,7 @@ extern "C" void clean_piddb_cache() {
 
 		if (!PiDDBCacheTable)
 		{
-			PiDDBCacheTable = (PRTL_AVL_TABLE)dereference(find_pattern<uintptr_t>((void*)ntoskrnlBase, ntoskrnlSize, "\x48\x8D\x0D\x00\x00\x00\x00\x49\x8B\xE9", "xxx????xxx"), 3); //win7
-
-			if (!PiDDBCacheTable)
-			{
-
-			}
-			else
-			{
-				uintptr_t entry_address = uintptr_t(PiDDBCacheTable->BalancedRoot.RightChild) + sizeof(RTL_BALANCED_LINKS);
-				piddbcache* entry = (piddbcache*)(entry_address);
-
-				/*capcom.sys(drvmap) : 0x57CD1415 iqvw64e.sys(kdmapper) : 0x5284EAC3*/
-				if (entry->TimeDateStamp == 0x57CD1415 || entry->TimeDateStamp == 0x5284EAC3) {
-					RemoveEntryList(&entry->List);
-					RtlDeleteElementGenericTableAvl(PiDDBCacheTable, entry);
-				}
-
-				ULONG count = 0;
-				for (auto link = entry->List.Flink; link != entry->List.Blink; link = link->Flink, count++)
-				{
-					piddbcache* cache_entry = (piddbcache*)(link);
-
-					if (cache_entry->TimeDateStamp == 0x57CD1415 || cache_entry->TimeDateStamp == 0x5284EAC3) {
-						RemoveEntryList(&cache_entry->List);
-						RtlDeleteElementGenericTableAvl(PiDDBCacheTable, cache_entry);
-					}
-					//DbgPrint("cache_entry count: %lu name: %wZ \t\t stamp: %x\n", count, cache_entry->DriverName, cache_entry->TimeDateStamp);
-				}
-			}
+		
 		}
 		else
 		{
