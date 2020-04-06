@@ -683,9 +683,6 @@ extern "C" void spoof_drives()
 	PDRIVER_OBJECT pDriver = pObject->DriverObject;
 
 	PDEVICE_OBJECT pDevice = pDriver->DeviceObject;
-
-	//\x48\x89\x5C\x24\x00\x55\x56\x57\x48\x83\xEC\x50\x8B\x41\x60 xxxx?xxxxxxxxxx
-	//48 89 5C 24 ? 55 56 57 48 83 EC 50 8B 41 60
 	
 	if (osVersion.dwBuildNumber >= 18363) {
 		RaidUnitRegisterInterfaces1903 pRegDevInt = find_pattern<RaidUnitRegisterInterfaces1903>((void*)storportBase, storportSize, "\x48\x89\x5C\x24\x00\x55\x56\x57\x48\x83\xEC\x50\x8B\x41\x60", "xxxx?xxxxxxxxxx");
