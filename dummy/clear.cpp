@@ -643,7 +643,6 @@ extern "C" void spoof_drives()
 	NTSTATUS status = IoGetDeviceObjectPointer(&DestinationString, FILE_READ_DATA, &pFileObj, &pObject);
 
 	PDRIVER_OBJECT pDriver = pObject->DriverObject;
-
 	PDEVICE_OBJECT pDevice = pDriver->DeviceObject;
 	
 	if (osVersion.dwBuildNumber >= 18363) {
