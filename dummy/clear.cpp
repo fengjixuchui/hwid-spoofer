@@ -675,7 +675,7 @@ extern "C" void spoof_drives()
 			pDevice = pDevice->NextDevice;
 		}
 	}
-	if (osVersion.dwBuildNumber >= 18362) {
+	else if (osVersion.dwBuildNumber >= 18362) {
 		RaidUnitRegisterInterfaces1903 pRegDevInt = find_pattern<RaidUnitRegisterInterfaces1903>((void*)storportBase, storportSize, "\x48\x89\x5C\x24\x00\x55\x56\x57\x48\x83\xEC\x50\x8B\x41\x60", "xxxx?xxxxxxxxxx");
 
 		while (pDevice->NextDevice != NULL)
